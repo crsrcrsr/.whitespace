@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>
+</title>
+<style>
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}
+</style>
+</head>
+<body>
+
+<script src="http://127.0.0.1:8081/socket.io/socket.io.js"></script>
+
+<script>
+   var socket = io('http://127.0.0.1:8081');
+   socket.on('connect', function() {
+        // sends to socket.io server the host/port of oscServer
+        // and oscClient
+        socket.emit('config',
+            {
+                server: {
+                    port: 3333,
+                    host: '127.0.0.1'
+                },
+                client: {
+                    port: 3334,
+                    host: '127.0.0.1'
+                }
+            }
+        );
+    });
+
+    socket.on('message', function(obj) {
+        var status = document.getElementById("status");
+        status.innerHTML = obj[0];
+        console.log(obj);
+    });
+</script>
+
+<button class="block" onclick="socket.emit('message', '/spawn/1');"> Spawn TOTEM
+</button>
+
+
+</body> </html>
