@@ -28,7 +28,7 @@
 <script src="http://127.0.0.1:8081/socket.io/socket.io.js"></script>
 
 <script>
-   var socket = io('http://127.0.0.1:8081');
+   var socket = io('http://192.168.1.108:8081');
    socket.on('connect', function() {
         // sends to socket.io server the host/port of oscServer
         // and oscClient
@@ -36,11 +36,11 @@
             {
                 server: {
                     port: 3333,
-                    host: '127.0.0.1'
+                    host: '192.168.1.108'
                 },
                 client: {
                     port: 3334,
-                    host: '127.0.0.1'
+                    host: '192.168.1.108'
                 }
             }
         );
